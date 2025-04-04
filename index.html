@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Terry</title>
-    <script src="js/api.js"></script>
+    <script src="js/index.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
-
+    <div id="gameContainer">
+        <h1>Project Terry</h1>
+        <p id="outputText">You are Terry A. Davis, a schizophrenic genius programmer and you have been given the chance to go back in time and restart from 3 possible points. What will you pick?</p>
+        <div>
+            <button class="decisionButton" id="decision1" onclick="handleDecision(1)">You are sitting at your boring office job as a software engineer for Ticketmaster when you receive a divine call.</button>
+            <button class="decisionButton" id="decision2" onclick="handleDecision(2)">You are an online developer experiencing mental episodes struggling to get people to notice your work.</button>
+            <button class="decisionButton" id="decision3" onclick="handleDecision(3)">You are a homeless man who was once a great programmer who wants to continue his work.</button>
+        </div>
+    </div>
+</body>
 </html>

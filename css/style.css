@@ -1,0 +1,134 @@
+:root {
+    --terry-yelo: #FFFF55;
+    --terry-scian: #55FFFF;
+}
+
+html {
+    background-color: var(--terry-scian);
+    overflow-y: hidden;
+}
+
+@font-face {
+    font-family: 'TempleOS';
+    src: url('/assets/fonts/templeos_font.ttf');
+}
+
+* {
+    color: white;
+    /* font-family: 'TempleOS'; */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.25rem;
+}
+
+/* Merged body styles */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--terry-scian);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* Button styles */
+button {
+    float: middle;
+    margin-left: auto;
+    margin-right: auto;
+    transition-duration: 0.2s;
+    -webkit-transition-duration: 0.2s;
+    background-color: gold;
+    border-width: medium;
+    border-color: gold;
+    padding: 20px;
+    font-size: 18px;
+    font-style: italic;
+    vertical-align: middle;
+}
+
+button:hover {
+    background-color: darkgoldenrod;
+    cursor: pointer;
+}
+
+/* Decision button specific styles */
+.decisionButton {
+    border-width: medium;
+    border-color: gold;
+    background-color: gold;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    color: black;
+    width: 800px;
+    height: 60px;
+}
+
+#gameContainer {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    max-width: 80%;
+    height: 100%;
+}
+
+#gameContainer > div {
+    height: 30%;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+}
+
+#gameContainer > h1 {
+    text-shadow: -1px -1px black, 1px -1px black, -1px 1px black, 1px 1px black;
+    color: var(--terry-yelo);
+}
+
+#outputText {
+    color: black;
+    margin: 0;
+    padding: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
+    white-space: normal;
+    max-width: 100%;
+}
+
+/* Added styles from the second CSS file */
+.center {
+    display: block;
+    float: middle;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+/* Link styles */
+a:link {
+    color: darkblue;
+    text-decoration: none;
+}
+
+a:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: darkcyan;
+    text-decoration: none;
+}
+
+hr {
+    width: medium;
+    color: gold;
+}
+
+h2 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+h3 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

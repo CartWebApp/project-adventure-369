@@ -3,19 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Terry</title>
-    <script src="js/index.js"></script>
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Terry's Journey: A Text Adventure</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="gameContainer">
-        <h1>Project Terry</h1>
-        <p id="outputText">You are Terry A. Davis, a schizophrenic genius programmer and you have been given the chance to go back in time and restart from 3 possible points. What will you pick?</p>
-        <div>
-            <button class="decisionButton" id="decision1" onclick="handleDecision(1)">You are sitting at your boring office job as a software engineer for Ticketmaster when you receive a divine call.</button>
-            <button class="decisionButton" id="decision2" onclick="handleDecision(2)">You are an online developer experiencing mental episodes struggling to get people to notice your work.</button>
-            <button class="decisionButton" id="decision3" onclick="handleDecision(3)">You are a homeless man who was once a great programmer who wants to continue his work.</button>
-        </div>
+    <div class="container">
+        <header>
+            <h1>Terry's Journey: A Text Adventure</h1>
+        </header>
+        
+        <main>
+            <div id="windowButtons">
+                <p>_</p>
+                <p>□</p>
+                <p>X</p>
+            </div>
+            <div id="game-container">
+                <div id="story-container">
+                    <div id="story-text"></div>
+                </div>
+                
+                <div id="choices-container"></div>
+                
+                <div id="status-container">
+                    <div id="mental-health">
+                        <span>Mental Health:</span>
+                        <div class="status-bar">
+                            <div id="mental-health-bar"></div>
+                        </div>
+                    </div>
+                    <div id="progress">
+                        <span>Project Progress:</span>
+                        <div class="status-bar">
+                            <div id="progress-bar"></div>
+                        </div>
+                    </div>
+                    <div id="shasta-cola" class="vertical-meter">
+                        <span>Diet Shasta:</span>
+                        <div class="status-bar vertical">
+                            <div id="shasta-cola-bar"></div>
+                        </div>
+                    </div>
+                    <div id="income-container">
+                        <span>Income: $<span id="income-amount">500</span></span>
+                    </div>
+                </div>
+                <div id="soda-container">
+                    <button id="soda-button" title="Drink Diet Shasta Cola ($5)">
+                        <img src="diet-shasta.png" alt="Diet Shasta Cola" class="soda-icon">
+                    </button>
+                </div>
+                <div id="glowie-container" class="hidden">
+                    <div id="glowie" class="glowie">
+                        <span>👨‍💼</span>
+                        <div class="glowie-text">CIA GLOWIE</div>
+                    </div>
+                </div>
+                
+                <div id="parrot-container" class="hidden">
+                    <img id="parrot" src="parrot.gif" alt="Flying Parrot">
+                </div>
+                <div id="train-container" class="hidden">
+                    <img id="train" src="train.png" alt="Train">
+                    <div id="game-over">GAME OVER</div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>A text adventure based on the life of Terry A. Davis</p>
+        </footer>
     </div>
+    
+    <script src="game.js"></script>
 </body>
 </html>

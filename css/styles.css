@@ -73,11 +73,17 @@ main {
   padding: 10px;
   background-color: #0a0a0a;
   border: 1px inset darkgray;
+  position: relative;
+  z-index: 5; /* Lower z-index so parrot can fly over it */
 }
 
 #story-text {
   white-space: pre-wrap;
   color: darkgrey;
+}
+
+#story-text p::before {
+  content: "> ";
 }
 
 #story-text p:last-of-type:not(:only-of-type) {
@@ -90,6 +96,8 @@ main {
 
 #choices-container {
   margin-bottom: 20px;
+  position: relative;
+  z-index: 5; /* Lower z-index so parrot can fly over it */
 }
 
 .choice-btn {
@@ -115,19 +123,68 @@ main {
   background-color: #1a1a1a;
 }
 
+/* Improved status container layout */
 #status-container {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+  position: relative;
+  z-index: 5; /* Lower z-index so parrot can fly over it */
+}
+
+.status-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.status-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 20px;
 }
 
 #mental-health,
-#progress,
-#shasta-cola,
-#income-container {
-  flex: 1;
-  margin: 0 10px;
+#progress {
+  width: 100%;
   color: black;
+  margin-bottom: 10px;
+}
+
+/* Vertical Diet Shasta bar */
+#shasta-cola {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 120px;
+  color: black;
+}
+
+#shasta-cola .status-bar {
+  width: 20px;
+  height: 100px;
+  margin-top: 5px;
+  position: relative;
+}
+
+#shasta-cola-bar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ff66cc;
+  transition: height 0.5s;
+}
+
+#income-container {
+  background-color: #0a0a0a;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  display: inline-block;
 }
 
 .status-bar {
@@ -139,18 +196,18 @@ main {
   margin-top: 5px;
 }
 
-#mental-health-bar,
-#progress-bar {
+/* Mental health and progress bars */
+#mental-health-bar {
   height: 100%;
   width: 100%;
-  background-color: black;
+  background-color: #33cc33; /* Green color */
   transition: width 0.5s;
 }
 
-#shasta-cola-bar {
+#progress-bar {
   height: 100%;
   width: 100%;
-  background-color: #ff66cc;
+  background-color: #33cc33; /* Green color */
   transition: width 0.5s;
 }
 
@@ -199,18 +256,16 @@ footer a {
     flex-direction: column;
   }
 
-  #mental-health,
-  #progress,
-  #shasta-cola,
-  #income-container {
-    margin: 10px 0;
+  .status-right {
+    margin-left: 0;
+    margin-top: 15px;
   }
 }
 
 /* Soda Button */
 #soda-container {
-  text-align: center;
-  margin-top: 15px;
+  display: flex;
+  align-items: center;
 }
 
 #soda-button {
@@ -222,6 +277,11 @@ footer a {
   border-radius: 50%;
 }
 
+#soda-button img {
+  height: 100px; /* Same height as the progress bar */
+  width: auto;
+}
+
 #soda-button:hover {
   transform: scale(1.1);
   background-color: rgba(255, 255, 255, 0.2);
@@ -229,12 +289,6 @@ footer a {
 
 #soda-button:active {
   transform: scale(0.95);
-}
-
-.soda-icon {
-  display: inline-block;
-  width: 32px;
-  height: auto;
 }
 
 /* Glowie */
@@ -271,14 +325,14 @@ footer a {
   font-weight: bold;
 }
 
-/* Parrot */
+/* Update parrot container to be on top of everything */
 #parrot-container {
-  position: absolute;
+  position: fixed; /* Changed to fixed to ensure it's always visible */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 20;
+  z-index: 100; /* Increased z-index to be on top of everything */
   pointer-events: none;
 }
 
@@ -288,11 +342,43 @@ footer a {
 
 #parrot {
   position: absolute;
-  width: 80px;
+  width: 100px;
   height: auto;
   cursor: pointer;
   user-select: none;
-  z-index: 25;
+}
+
+/* Train animation styles */
+#train-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 200; /* Even higher z-index than parrot */
+  pointer-events: none;
+  display: none;
+}
+
+#train {
+  position: absolute;
+  width: 300px;
+  height: auto;
+}
+
+#game-over {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: black;
+  color: red;
+  padding: 20px;
+  border: 2px solid red;
+  font-size: 24px;
+  z-index: 300;
+  display: none;
+  text-align: center;
 }
 
 /* Utility Classes */
@@ -306,8 +392,8 @@ footer a {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 5;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  z-index: 55555555;
 }
 
 .message {
@@ -315,59 +401,4 @@ footer a {
   margin-top: 10px;
   padding: 5px;
   border-left: 3px solid #ff66cc;
-}
-
-/* Vertical Meter */
-.vertical-meter {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 10px;
-  color: black;
-}
-
-.status-bar.vertical {
-  width: 20px;
-  height: 150px;
-  position: relative;
-}
-
-#shasta-cola-bar {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  background-color: #ff66cc;
-  transition: height 0.5s;
-}
-
-/* Train */
-#train-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 30;
-  pointer-events: none;
-}
-
-#train {
-  position: absolute;
-  width: 300px;
-  height: auto;
-  z-index: 35;
-}
-
-#game-over {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 48px;
-  font-weight: bold;
-  color: red;
-  text-shadow: 2px 2px 4px black;
-  z-index: 40;
-  opacity: 0;
-  transition: opacity 1s;
 }

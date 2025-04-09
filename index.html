@@ -4,19 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terry's Journey: A Text Adventure</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Terry's Journey: A Text Adventure</h1>
-        </header>
-        
         <main>
             <div id="windowButtons">
-                <p>_</p>
+                <p>-</p>
                 <p>□</p>
                 <p>X</p>
+            </div>
+            <div id="glowie-container" class="hidden">
+                <div id="glowie" class="glowie">
+                    <span>👨‍💼</span>
+                    <div class="glowie-text">CIA GLOWIE</div>
+                </div>
+            </div>
+            
+            <div id="parrot-container" class="hidden">
+                <img id="parrot" src="parrot.gif" alt="Flying Parrot">
             </div>
             <div id="game-container">
                 <div id="story-container">
@@ -26,46 +32,43 @@
                 <div id="choices-container"></div>
                 
                 <div id="status-container">
-                    <div id="mental-health">
-                        <span>Mental Health:</span>
-                        <div class="status-bar">
-                            <div id="mental-health-bar"></div>
+                    <div class="status-left">
+                        <div id="mental-health">
+                            <span>Mental Health:</span>
+                            <div class="status-bar">
+                                <div id="mental-health-bar"></div>
+                            </div>
+                        </div>
+                        
+                        <div id="progress">
+                            <span>Project Progress:</span>
+                            <div class="status-bar">
+                                <div id="progress-bar"></div>
+                            </div>
+                        </div>
+                        
+                        <div id="income-container">
+                            <span>Income: $<span id="income-amount">500</span></span>
                         </div>
                     </div>
-                    <div id="progress">
-                        <span>Project Progress:</span>
-                        <div class="status-bar">
-                            <div id="progress-bar"></div>
+                    
+                    <div class="status-right">
+                        <div id="shasta-cola">
+                            <span>Diet Shasta:</span>
+                            <div class="status-bar">
+                                <div id="shasta-cola-bar"></div>
+                            </div>
+                        </div>
+                        
+                        <div id="soda-container">
+                            <button id="soda-button" title="Drink Diet Shasta Cola ($5)">
+                                <img src="diet-shasta.png" alt="Diet Shasta Cola">
+                            </button>
                         </div>
                     </div>
-                    <div id="shasta-cola" class="vertical-meter">
-                        <span>Diet Shasta:</span>
-                        <div class="status-bar vertical">
-                            <div id="shasta-cola-bar"></div>
-                        </div>
-                    </div>
-                    <div id="income-container">
-                        <span>Income: $<span id="income-amount">500</span></span>
-                    </div>
                 </div>
-                <div id="soda-container">
-                    <button id="soda-button" title="Drink Diet Shasta Cola ($5)">
-                        <img src="diet-shasta.png" alt="Diet Shasta Cola" class="soda-icon">
-                    </button>
-                </div>
-                <div id="glowie-container" class="hidden">
-                    <div id="glowie" class="glowie">
-                        <span>👨‍💼</span>
-                        <div class="glowie-text">CIA GLOWIE</div>
-                    </div>
-                </div>
-                
-                <div id="parrot-container" class="hidden">
-                    <img id="parrot" src="parrot.gif" alt="Flying Parrot">
-                </div>
-                <div id="train-container" class="hidden">
+                <div id="train-container">
                     <img id="train" src="train.png" alt="Train">
-                    <div id="game-over">GAME OVER</div>
                 </div>
             </div>
         </main>
@@ -75,6 +78,12 @@
         </footer>
     </div>
     
-    <script src="game.js"></script>
+    <div id="game-over">
+        <h2>GAME OVER</h2>
+        <p>Mental health reached zero</p>
+        <button id="restart-button" class="restart-btn">Restart Game</button>
+    </div>
+    
+    <script type="module" src="/js/game.js"></script>
 </body>
 </html>

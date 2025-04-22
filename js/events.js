@@ -8,7 +8,7 @@ function triggerRandomEvent() {
 	if (gameState.eventActive) return
 	if (getEnding()) return
 
-	const eventType = Math.random() > 0.85 ? "glowie" : "parrot"
+	const eventType = Math.random() > 0.5 ? "glowie" : "parrot"
 
 	if (eventType === "glowie") {
 		triggerGlowieEvent()

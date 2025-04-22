@@ -5,6 +5,15 @@ import { triggerTrainAnimation } from "./events.js"
 
 let endScreen = false;
 
+function typeWriter(text, index) {
+	if (index < text.length) {
+		document.getElementById("story-text").innerHTML += text.charAt(index);
+		setTimeout(function () {
+			typeWriter(text, index + 1);
+		}, 100); // Delay of 100ms
+	}
+}
+
 // Update the game display based on current state
 function updateGameDisplay() {
 	const storyTextElement = document.getElementById("story-text")

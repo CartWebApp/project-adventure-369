@@ -1,5 +1,6 @@
 // Import story nodes
 import { storyNodes } from "./story.js"
+import { popUp } from "./ui-handlers.js"
 
 // Game state object
 let gameState = {
@@ -8,7 +9,7 @@ let gameState = {
 	currentNode: "start",
 	history: [],
 	shastaCola: 100,
-	income: 25,
+	balance: 25,
 	eventActive: false,
 	shastaInterval: null,
 	eventInterval: null,
@@ -23,7 +24,7 @@ function initGameState() {
 		currentNode: "start",
 		history: [],
 		shastaCola: 100,
-		income: 25,
+		balance: 25,
 		eventActive: false,
 		gameOver: false,
 		shastaInterval: null,
@@ -49,17 +50,19 @@ function makeChoice(choice) {
 		gameState.projectProgress += choice.projectProgress
 	}
 
-	// Update income based on choice
-	if (choice.income) {
-		gameState.income += choice.income
+	// Update balance based on choice
+	if (choice.balance) {
+		gameState.balance += choice.balance
 	} else {
-		// Default income change based on the choice type
+		// Default balance change based on the choice type
 		if (choice.nextNode.includes("job") || choice.nextNode.includes("work")) {
-			gameState.income += Math.floor(Math.random() * 50) + 20
+			gameState.balance += Math.floor(Math.random() * 50) + 20
 		} else if (choice.nextNode.includes("homeless") || choice.nextNode.includes("give_up")) {
-			gameState.income -= Math.floor(Math.random() * 30) + 10
+			gameState.balance -= Math.floor(Math.random() * 30) + 10
 		}
 	}
+
+	checkMoney()
 
 	// Move to next node
 	gameState.currentNode = choice.nextNode
@@ -67,10 +70,10 @@ function makeChoice(choice) {
 
 // Decrease Shasta Cola level
 function decreaseShastaCola() {
-	gameState.shastaCola -= 5
+	gameState.shastaCola -= 10
 	if (gameState.shastaCola <= 0) {
 		gameState.shastaCola = 0
-		gameState.mentalHealth -= 5
+		gameState.mentalHealth -= 10
 	}
 }
 
@@ -78,13 +81,21 @@ function decreaseShastaCola() {
 function drinkShastaCola() {
 	if (gameState.eventActive) return
 
-	if (gameState.income >= 5) {
-		gameState.income -= 5
+	// popUp(null, "5")
+
+	if (gameState.balance >= 5) {
+		gameState.balance -= 5
 		gameState.shastaCola = Math.min(100, gameState.shastaCola + 30)
 		return true
 	}
 
 	return false
+}
+
+function checkMoney() {
+	if (gameState.balance < 0) {
+		gameState.balance = 0
+	}
 }
 
 // Export functions and state

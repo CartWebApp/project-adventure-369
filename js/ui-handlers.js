@@ -14,14 +14,24 @@ function typeWriter(text, index) {
 	}
 }
 
+function getPos(obj) {
+    if (!obj) return;
+    let objBox = obj.getBoundingClientRect();
+    let pos = {};
+    pos.top = objBox.top
+    pos.bottom = objBox.bottom
+    pos.left = objBox.left
+    pos.Right = objBox.Right
+    return pos;
+}
+
 // Update the game display based on current state
 function updateGameDisplay() {
 	const storyTextElement = document.getElementById("story-text")
 	const choicesContainer = document.getElementById("choices-container")
 	const mentalHealthBar = document.getElementById("mental-health-bar")
-	const progressBar = document.getElementById("progress-bar")
 	const shastaColaBar = document.getElementById("shasta-cola-bar")
-	const incomeAmount = document.getElementById("income-amount")
+	const balanceAmount = document.getElementById("balance-amount")
 
 	// Check if mental health has reached zero
 	if (gameState.mentalHealth <= 0 && !gameState.gameOver) {
@@ -53,11 +63,10 @@ function updateGameDisplay() {
 
 	// Update status bars
 	mentalHealthBar.style.width = `${Math.max(0, Math.min(100, gameState.mentalHealth))}%`
-	progressBar.style.width = `${Math.max(0, Math.min(100, gameState.projectProgress))}%`
 	shastaColaBar.style.height = `${gameState.shastaCola}%`
 
-	// Update income
-	incomeAmount.textContent = gameState.income
+	// Update balance
+	balanceAmount.textContent = gameState.balance
 
 	// Change mental health bar color based on value
 	if (gameState.mentalHealth < 30) {
@@ -109,10 +118,10 @@ function updateShastaCola() {
 	shastaColaBar.style.height = `${gameState.shastaCola}%`
 }
 
-// Update income display
-function updateIncome() {
-	const incomeAmount = document.getElementById("income-amount")
-	incomeAmount.textContent = gameState.income
+// Update balance display
+function updatebalance() {
+	const balanceAmount = document.getElementById("balance-amount")
+	balanceAmount.textContent = gameState.balance
 }
 
 // Show message in the story text area
@@ -162,7 +171,7 @@ function initUI() {
 		const success = drinkShastaCola()
 		if (success) {
 			updateShastaCola()
-			updateIncome()
+			updatebalance()
 		} else {
 			showMessage("Not enough money for Diet Shasta Cola!")
 		}
@@ -172,31 +181,31 @@ function initUI() {
 	const windowButtons = document.querySelectorAll("#windowButtons p")
 
 	// Close button (X)
-	windowButtons[2].addEventListener("click", () => {
-		if (confirm("Are you sure you want to close the game?")) {
-			document.body.innerHTML =
-				'<div style="color: white; text-align: center; margin-top: 100px;"><h1>Game Closed</h1><p>Refresh the page to restart</p></div>'
-		}
-	})
+	// windowButtons[2].addEventListener("click", () => {
+	// 	if (confirm("Are you sure you want to close the game?")) {
+	// 		document.body.innerHTML =
+	// 			'<div style="color: white; text-align: center; margin-top: 100px;"><h1>Game Closed</h1><p>Refresh the page to restart</p></div>'
+	// 	}
+	// })
 
-	// Minimize button (_)
-	windowButtons[0].addEventListener("click", () => {
-		if (gameContainer.style.display === "none") {
-			gameContainer.style.display = "block"
-		} else {
-			gameContainer.style.display = "none"
-		}
-	})
+	// // Minimize button (_)
+	// windowButtons[0].addEventListener("click", () => {
+	// 	if (gameContainer.style.display === "none") {
+	// 		gameContainer.style.display = "block"
+	// 	} else {
+	// 		gameContainer.style.display = "none"
+	// 	}
+	// })
 
-	// Maximize button (□)
-	windowButtons[1].addEventListener("click", () => {
-		const container = document.querySelector(".container")
-		if (container.style.maxWidth === "100%") {
-			container.style.maxWidth = "800px"
-		} else {
-			container.style.maxWidth = "100%"
-		}
-	})
+	// // Maximize button (□)
+	// windowButtons[1].addEventListener("click", () => {
+	// 	const container = document.querySelector(".container")
+	// 	if (container.style.maxWidth === "100%") {
+	// 		container.style.maxWidth = "800px"
+	// 	} else {
+	// 		container.style.maxWidth = "100%"
+	// 	}
+	// })
 
 	// Update game display
 	updateGameDisplay()
@@ -206,5 +215,14 @@ function getEnding() {
 	return endScreen
 }
 
+function popUp(el, text) {
+	let popUp = document.createElement("p")
+	document.getElementById("popup").appendChild(popUp)
+	popUp.classList.add("popUp")
+	popUp.style.left = getPos(el)
+	popUp.style.right = getPos(el)
+	popUp.innerText = text
+}
+
 // Export UI functions
-export { updateGameDisplay, updateShastaCola, updateIncome, showMessage, showGameOver, initUI, getEnding }
+export { popUp, updateGameDisplay, updateShastaCola, updatebalance, showMessage, showGameOver, initUI, getEnding }

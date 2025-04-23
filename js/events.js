@@ -1,6 +1,6 @@
 // Import dependencies
 import { gameState } from "./game-state.js"
-import { updateGameDisplay, updateIncome, showMessage, showGameOver, getEnding } from "./ui-handlers.js"
+import { updateGameDisplay, updatebalance, showMessage, showGameOver, getEnding } from "./ui-handlers.js"
 
 // Trigger a random event
 function triggerRandomEvent() {
@@ -140,8 +140,8 @@ function triggerParrotEvent() {
 		document.body.classList.remove("overlay")
 
 		// Reward
-		gameState.income += 15
-		updateIncome()
+		gameState.balance += 15
+		updatebalance()
 		showMessage("You caught the parrot! +$15")
 	}
 }
@@ -151,6 +151,7 @@ function triggerTrainAnimation() {
 	const trainContainer = document.getElementById("train-container")
 	const train = document.getElementById("train")
 	const gameContainer = document.getElementById("game-container")
+	const gameContainerWindowBar = document.getElementById("windowButtons")
 
 	// Show train container
 	trainContainer.style.display = "block"
@@ -176,6 +177,7 @@ function triggerTrainAnimation() {
 				// Push game container
 				if (startPos > 100) {
 					gameContainer.style.transform = `translateX(${startPos - 100}px)`
+					gameContainerWindowBar.style.transform = `translateX(${startPos - 100}px)`
 				}
 
 				if (startPos < endPos) {

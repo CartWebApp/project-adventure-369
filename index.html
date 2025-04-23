@@ -9,11 +9,6 @@
 <body>
     <div class="container">
         <main>
-            <div id="windowButtons">
-                <p>-</p>
-                <p>□</p>
-                <p>X</p>
-            </div>
             <div id="glowie-container" class="hidden">
                 <div id="glowie" class="glowie">
                     <span>👨‍💼</span>
@@ -25,6 +20,7 @@
                 <img id="parrot" src="parrot.gif" alt="Flying Parrot">
             </div>
             <div id="game-container">
+                <p class="close">[X]</p>
                 <div id="story-container">
                     <div id="story-text"></div>
                 </div>
@@ -40,15 +36,8 @@
                             </div>
                         </div>
                         
-                        <div id="progress">
-                            <span>Project Progress:</span>
-                            <div class="status-bar">
-                                <div id="progress-bar"></div>
-                            </div>
-                        </div>
-                        
-                        <div id="income-container">
-                            <span>Income: $<span id="income-amount">500</span></span>
+                        <div id="balance-container">
+                            <span>Balance: $<span id="balance-amount">...</span></span>
                         </div>
                     </div>
                     
@@ -61,8 +50,12 @@
                         </div>
                         
                         <div id="soda-container">
+                            <div id="popup">
+
+                            </div>
                             <button id="soda-button" title="Drink Diet Shasta Cola ($5)">
                                 <img src="diet-shasta.png" alt="Diet Shasta Cola">
+                                <p>$5</p>
                             </button>
                         </div>
                     </div>

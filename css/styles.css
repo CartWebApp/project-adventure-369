@@ -86,7 +86,7 @@ main {
   display: block;
   top: -10px;
   right: 6px;
-  cursor: var(--pointer);
+  /* cursor: var(--pointer); */
   line-height: 0.8em;
   letter-spacing: 0.1em;
   color: mediumblue;

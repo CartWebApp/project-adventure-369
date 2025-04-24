@@ -153,6 +153,8 @@ function triggerTrainAnimation() {
 	const gameContainer = document.getElementById("game-container")
 	const gameContainerWindowBar = document.getElementById("windowButtons")
 
+	clearAllEvents()
+
 	// Show train container
 	trainContainer.style.display = "block"
 
@@ -216,6 +218,16 @@ function triggerTrainAnimation() {
 
 			requestAnimationFrame(animateFromRight)
 			break
+	}
+}
+
+function clearAllEvents() {
+	for (let i of document.getElementById("parrot-container").children) {
+		i.remove()
+	}
+
+	for (let i of document.getElementById("glowie-container").children) {
+		i.remove()
 	}
 }
 

@@ -71,6 +71,7 @@ function makeChoice(choice) {
 // Decrease Shasta Cola level
 function decreaseShastaCola() {
 	gameState.shastaCola -= 10
+
 	if (gameState.shastaCola <= 0) {
 		gameState.shastaCola = 0
 		gameState.mentalHealth -= 10

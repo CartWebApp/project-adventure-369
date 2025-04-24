@@ -10,6 +10,11 @@ html {
   overflow: hidden;
 }
 
+*::selection {
+  background-color: black;
+  color: yellow;
+}
+
 @font-face {
 	font-family: 'tos-online'; 
 	src: url('../assets/fonts/tos-online.woff2');
@@ -35,17 +40,9 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  width: 1280px;
+  max-width: 1280px;
   height: 960px;
   background-color: mediumblue;
-}
-
-header {
-  text-align: center;
-  margin-bottom: 30px;
-  border-bottom: 2px solid darkgray;
-  padding-bottom: 10px;
-  color: white;
 }
 
 main {
@@ -65,6 +62,11 @@ main {
   background-color: red;
 }
 
+#settings-container {
+  width: 50%;
+}
+
+#settings-container,
 #game-container {
   border: 6px double mediumblue;
   min-height: 3em;
@@ -73,12 +75,14 @@ main {
   outline: 4px solid white;
   margin: 5px 5px;
   overflow: visible;
-  width: 100%;
-  max-width: calc(100% - 16px);
-  float: left;
   position: relative;
 }
 
+#game-container {
+  width: calc(100% - 9px);
+}
+
+#settings-container > p:first-of-type,
 #game-container > p:first-of-type {
   position: absolute;
   background: white;
@@ -92,6 +96,7 @@ main {
   color: mediumblue;
 }
 
+#settings-container::before,
 #game-container::before {
   content: "AFTERDAVIS";
   display: block;
@@ -107,24 +112,29 @@ main {
   animation: windowTitle 0.5s step-start infinite;
 }
 
+#settings-container::before {
+  content: "SETTINGS";
+}
+
 #story-container {
+  border: 6px double mediumblue;
   margin-bottom: 20px;
   height: 300px;
   overflow-y: auto;
   padding: 10px;
-  background-color: mediumblue;
+  background-color: white;
   position: relative;
   z-index: 5; /* Lower z-index so parrot can fly over it */
 }
 
-#story-text {
+#story-text > p {
   white-space: pre-wrap;
-  color: darkgrey;
+  color: mediumblue;
 }
 
 #story-text p::before {
   content: "> ";
-  color: rgb(255, 255, 0);
+  color: #149f35;
 }
 
 #story-text p:last-of-type::after {
@@ -143,11 +153,11 @@ main {
 }
 
 #story-text p:last-of-type:not(:only-of-type) {
-  color: white;
+  color: mediumblue;
 }
 
 #story-text p:only-of-type {
-  color: white;
+  color: mediumblue;
 }
 
 #choices-container {
@@ -197,6 +207,10 @@ main {
   margin-left: 20px;
 }
 
+#mental-health {
+  position: relative;
+}
+
 #mental-health,
 #progress {
   width: 100%;
@@ -243,10 +257,31 @@ main {
 .status-bar {
   height: 20px;
   background-color: #0a0a0a;
-  border: 1px inset darkgray;
-  border-radius: 10px;
+  border: 2px solid black;
   overflow: hidden;
   margin-top: 5px;
+}
+
+.head2 {
+  background-color: black;
+  text-transform: uppercase;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.head2::before,
+.head2::after {
+  content: "--";
+}
+
+.splitter {
+  display: flex;
+  justify-content: space-evenly;
+  position: absolute;
+  color: black;
+  width: 100%;
+  top: 29px;
 }
 
 /* Mental health and progress bars */
@@ -254,14 +289,12 @@ main {
   height: 100%;
   width: 100%;
   background-color: #33cc33; /* Green color */
-  transition: width 0.5s;
 }
 
 #progress-bar {
   height: 100%;
   width: 100%;
   background-color: #33cc33; /* Green color */
-  transition: width 0.5s;
 }
 
 footer {
@@ -489,4 +522,32 @@ footer a {
     color: mediumblue;
     background-color: white;
   }
+}
+
+header {
+  display: flex;
+  line-height: 0.8;
+  justify-content: space-between;
+}
+
+header > div {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  background-color: mediumblue;
+}
+
+header p:not(:last-of-type) {
+  margin-right: 10px;
+}
+
+header > p:last-of-type {
+  color: yellow;
+  justify-self: flex-end;
+  align-self: flex-end;
+  justify-content: flex-end;
+}
+
+#keystroke {
+  text-transform: uppercase;
 }

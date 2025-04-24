@@ -14,6 +14,10 @@ function typeWriter(text, index) {
 	}
 }
 
+document.addEventListener("keypress", (event) => {
+	document.getElementById("keystroke").innerText = event.key;
+})
+
 function getPos(obj) {
     if (!obj) return;
     let objBox = obj.getBoundingClientRect();

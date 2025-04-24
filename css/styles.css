@@ -88,7 +88,7 @@ main {
   display: block;
   top: -10px;
   right: 6px;
-  cursor: var(--pointer);
+  /* cursor: var(--pointer); */
   line-height: 0.8em;
   letter-spacing: 0.1em;
   color: mediumblue;
@@ -166,7 +166,7 @@ main {
   background-color: #111;
   color: white;
   border: 1px inset darkgray;
-  cursor: pointer;
+  /* cursor: pointer; */
   text-align: left;
   font-size: 16px;
   transition: background-color 0.3s;
@@ -299,7 +299,7 @@ footer a {
   background-color: #111;
   color: white;
   border: 1px inset darkgray;
-  cursor: pointer;
+  /* cursor: pointer; */
   text-align: center;
   font-size: 16px;
   transition: background-color 0.3s;
@@ -330,7 +330,7 @@ footer a {
 #soda-button {
   background: none;
   border: none;
-  cursor: pointer;
+  /* cursor: pointer; */
   transition: transform 0.2s;
   padding: 5px;
   border-radius: 50%;
@@ -368,7 +368,7 @@ footer a {
 .glowie {
   position: absolute;
   font-size: 40px;
-  cursor: pointer;
+  /* cursor: pointer; */
   user-select: none;
   transition: transform 0.1s;
 }
@@ -403,7 +403,7 @@ footer a {
   position: absolute;
   width: 100px;
   height: auto;
-  cursor: pointer;
+  /* cursor: pointer; */
   user-select: none;
 }
 

@@ -1,12 +1,13 @@
-html {
-  overflow: hidden;
-}
-
 * {
+  cursor: url('/assets/cursor.png'), auto;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'dos_vga', monospace;
+}
+
+html {
+  overflow: hidden;
 }
 
 @font-face {
@@ -50,6 +51,7 @@ header {
 
 main {
   flex: 1;
+  background-color: mediumblue;
 }
 
 #windowButtons p {
@@ -66,7 +68,7 @@ main {
 }
 
 #game-container {
-  border: 6px double #0000cd;
+  border: 6px double mediumblue;
   min-height: 3em;
   background: white;
   padding: 1em;
@@ -89,7 +91,7 @@ main {
   cursor: var(--pointer);
   line-height: 0.8em;
   letter-spacing: 0.1em;
-  color: #0000cd;
+  color: mediumblue;
 }
 
 #game-container::before {
@@ -102,7 +104,7 @@ main {
   opacity: 1;
   top: -9px;
   left: 6px;
-  color: #0000cd;
+  color: mediumblue;
   background-color: white;
   animation: windowTitle 0.5s step-start infinite;
 }
@@ -112,7 +114,7 @@ main {
   height: 300px;
   overflow-y: auto;
   padding: 10px;
-  background-color: #0000cd;
+  background-color: mediumblue;
   position: relative;
   z-index: 5; /* Lower z-index so parrot can fly over it */
 }
@@ -477,11 +479,11 @@ footer a {
 @keyframes windowTitle {
   100% {
     color: white;
-    background-color: #0000cd;
+    background-color: mediumblue;
   }
 
   50% {
-    color: #0000cd;
+    color: mediumblue;
     background-color: white;
   }
 }

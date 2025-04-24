@@ -32,13 +32,12 @@ body {
 
 .container {
   margin: 0 auto;
-  padding: 20px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   width: 1280px;
   height: 960px;
-  background-color: white;
+  background-color: mediumblue;
 }
 
 header {
@@ -51,7 +50,6 @@ header {
 
 main {
   flex: 1;
-  background-color: mediumblue;
 }
 
 #windowButtons p {
@@ -73,7 +71,7 @@ main {
   background: white;
   padding: 1em;
   outline: 4px solid white;
-  margin: 12px 8px;
+  margin: 5px 5px;
   overflow: visible;
   width: 100%;
   max-width: calc(100% - 16px);
@@ -161,12 +159,12 @@ main {
 .choice-btn {
   display: block;
   width: 100%;
-  padding: 10px;
   margin-bottom: 10px;
-  background-color: #111;
-  color: white;
-  border: 1px inset darkgray;
-  cursor: pointer;
+  background-color: white;
+  color: red;
+  border: none;
+  text-decoration: underline;
+  cursor: var(--pointer);
   text-align: left;
   font-size: 16px;
   transition: background-color 0.3s;
@@ -174,10 +172,6 @@ main {
 
 .choice-btn::before {
   content: "> ";
-}
-
-.choice-btn:hover {
-  background-color: #1a1a1a;
 }
 
 /* Improved status container layout */
@@ -240,11 +234,10 @@ main {
 }
 
 #balance-container {
-  background-color: gray;
-  color: white;
-  padding: 8px 15px;
+  background-color: white;
+  color: #149f35;
   display: inline-block;
-  border: 1px inset black;
+  border: none;
 }
 
 .status-bar {
@@ -295,19 +288,13 @@ footer a {
   display: block;
   width: 200px;
   margin: 20px auto;
-  padding: 10px;
-  background-color: #111;
-  color: white;
-  border: 1px inset darkgray;
-  cursor: pointer;
+  color: red;
+  text-decoration: underline;
+  cursor: var(--pointer);
   text-align: center;
   font-size: 16px;
-  transition: background-color 0.3s;
-}
-
-.restart-btn:hover {
-  background-color: #1a1a1a;
-  box-shadow: 0 0 5px rgba(51, 255, 51, 0.5);
+  border: none;
+  background-color: white;
 }
 
 @media (max-width: 600px) {
@@ -330,7 +317,7 @@ footer a {
 #soda-button {
   background: none;
   border: none;
-  cursor: pointer;
+  cursor: var(--pointer);
   transition: transform 0.2s;
   padding: 5px;
   border-radius: 50%;
@@ -368,7 +355,7 @@ footer a {
 .glowie {
   position: absolute;
   font-size: 40px;
-  cursor: pointer;
+  cursor: var(--pointer);
   user-select: none;
   transition: transform 0.1s;
 }
@@ -403,7 +390,7 @@ footer a {
   position: absolute;
   width: 100px;
   height: auto;
-  cursor: pointer;
+  cursor: var(--pointer);
   user-select: none;
 }
 
@@ -430,14 +417,30 @@ footer a {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: black;
-  color: red;
-  padding: 20px;
-  border: 2px solid red;
-  font-size: 24px;
-  z-index: 300;
-  display: none;
-  text-align: center;
+  border: 6px double mediumblue;
+  outline: 4px solid white;
+  min-height: 3em;
+  background: white;
+  padding: 1em;
+  margin: 12px 8px;
+  overflow: visible;
+  max-width: calc(100% - 16px);
+  color: mediumblue;
+}
+
+#game-over::before {
+  content: "AFTERDAVIS";
+  display: block;
+  overflow: visible;
+  padding: 2px 1px 0px 2px;
+  line-height: 0.7;
+  position: absolute;
+  opacity: 1;
+  top: -9px;
+  left: 6px;
+  color: mediumblue;
+  background-color: white;
+  animation: windowTitle 0.5s step-start infinite;
 }
 
 /* Utility Classes */

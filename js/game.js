@@ -1,6 +1,6 @@
 // Import dependencies
 import { gameState, initGameState, decreaseShastaCola as decreaseShastaColaState } from "./game-state.js"
-import { updateShastaCola as updateShastaColaUI, UI, updateGameDisplay } from "./ui-handlers.js"
+import { updateShastaCola as updateShastaColaUI, UI } from "./ui-handlers.js"
 import { triggerRandomEvent } from "./events.js"
 import { storyNodes } from "./story.js"
 
@@ -10,14 +10,15 @@ function initGame() {
 	initGameState()
 
 	// Initialize UI
-	new UI(storyNodes.start.text).init()
+	let UIManager = new UI(storyNodes.start.text)
+	UIManager.init()
 
 	// Start game systems
-	initGameSystems()
+	initGameSystems(UIManager)
 }
 
 // Initialize game systems (timers, etc.)
-function initGameSystems() {
+function initGameSystems(ui) {
 	// Clear any existing intervals
 	if (gameState.shastaInterval) {
 		clearInterval(gameState.shastaInterval)
@@ -32,7 +33,7 @@ function initGameSystems() {
 		decreaseShastaColaState()
 		updateShastaColaUI()
 		if (!gameState.eventActive) {
-			updateGameDisplay() // Update display if mental health changed
+			ui.updateGameDisplay() // Update display if mental health changed
 		}
 	}, 2000)
 

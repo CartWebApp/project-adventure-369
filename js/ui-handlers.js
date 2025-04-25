@@ -5,12 +5,21 @@ import { triggerTrainAnimation } from "./events.js"
 
 let endScreen = false;
 
-function typeWriter(text, index) {
-	if (index < text.length) {
-		document.getElementById("story-text").innerHTML += text.charAt(index);
-		setTimeout(function () {
-			typeWriter(text, index + 1);
-		}, 100); // Delay of 100ms
+export class UI {
+	constructor(initMessage) {
+		this.initMessage = initMessage;
+	}
+
+	init() {
+		this.typeWriter(this.initMessage, 0);
+	}
+
+	typeWriter(text, index) {
+		console.log("type")
+		if (index < text.length) {
+			document.getElementById("story-text").innerHTML += text.charAt(index);
+			setTimeout(this.typeWriter(text, index + 1)); // Delay of 100ms
+		}
 	}
 }
 
@@ -42,77 +51,6 @@ function updateGameDisplay() {
 		gameState.gameOver = true
 		triggerTrainAnimation()
 		return
-	}
-
-	// Clear previous content
-	choicesContainer.innerHTML = ""
-
-	// Get current node
-	const currentNode = storyNodes[gameState.currentNode]
-
-	// Update story text
-	if (gameState.history.length > 0) {
-		let historyHtml = ""
-		gameState.history.forEach((text) => {
-			historyHtml += `<p>${text}</p>`
-		})
-		storyTextElement.innerHTML = historyHtml + `<p>${currentNode.text}</p>`
-	} else {
-		storyTextElement.innerHTML = `<p>${currentNode.text}</p>`
-	}
-
-	// Scroll to bottom of story container
-	const storyContainer = document.getElementById("story-container")
-	storyContainer.scrollTop = storyContainer.scrollHeight
-
-	// Update status bars
-	mentalHealthBar.style.width = `${Math.max(0, Math.min(100, gameState.mentalHealth))}%`
-	shastaColaBar.style.height = `${gameState.shastaCola}%`
-
-	// Update balance
-	balanceAmount.textContent = gameState.balance
-
-	// Change mental health bar color based on value
-	if (gameState.mentalHealth < 30) {
-		mentalHealthBar.style.backgroundColor = "#ff3333" // Red for low health
-	} else if (gameState.mentalHealth < 60) {
-		mentalHealthBar.style.backgroundColor = "#ffcc33" // Yellow for medium health
-	} else {
-		mentalHealthBar.style.backgroundColor = "#33cc33" // Green for good health
-	}
-
-	// If this is an ending node
-	if (currentNode.ending) {
-		// Display ending
-		const endingElement = document.createElement("div")
-		endingElement.className = "ending"
-		endingElement.textContent = currentNode.ending
-		choicesContainer.appendChild(endingElement)
-
-		// Add restart button
-		const restartButton = document.createElement("button")
-		restartButton.className = "restart-btn"
-		restartButton.textContent = "Restart Game"
-		restartButton.addEventListener("click", () => {window.location.reload()})
-		choicesContainer.appendChild(restartButton)
-
-		endScreen = true;
-
-		return
-	}
-
-	// Add choices
-	if (!gameState.eventActive) {
-		currentNode.choices.forEach((choice) => {
-			const choiceButton = document.createElement("button")
-			choiceButton.className = "choice-btn"
-			choiceButton.textContent = choice.text
-			choiceButton.addEventListener("click", () => {
-				makeChoice(choice)
-				updateGameDisplay()
-			})
-			choicesContainer.appendChild(choiceButton)
-		})
 	}
 }
 
@@ -180,6 +118,8 @@ function initUI() {
 			showMessage("Not enough money for Diet Shasta Cola!")
 		}
 	})
+
+	typeWriter(currentNode.text, 0)
 
 	// Add window button functionality
 	const windowButtons = document.querySelectorAll("#windowButtons p")

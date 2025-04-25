@@ -127,6 +127,10 @@ main {
   z-index: 5; /* Lower z-index so parrot can fly over it */
 }
 
+#story-text {
+  color: mediumblue;
+}
+
 #story-text > p {
   white-space: pre-wrap;
   color: mediumblue;

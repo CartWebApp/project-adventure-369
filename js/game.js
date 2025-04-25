@@ -1,7 +1,8 @@
 // Import dependencies
 import { gameState, initGameState, decreaseShastaCola as decreaseShastaColaState } from "./game-state.js"
-import { updateShastaCola as updateShastaColaUI, initUI, updateGameDisplay } from "./ui-handlers.js"
+import { updateShastaCola as updateShastaColaUI, UI, updateGameDisplay } from "./ui-handlers.js"
 import { triggerRandomEvent } from "./events.js"
+import { storyNodes } from "./story.js"
 
 // Initialize the game
 function initGame() {
@@ -9,7 +10,7 @@ function initGame() {
 	initGameState()
 
 	// Initialize UI
-	initUI()
+	new UI(storyNodes.start.text).init()
 
 	// Start game systems
 	initGameSystems()
@@ -45,39 +46,6 @@ function initGameSystems() {
 		}
 	}, 10000)
 }
-
-// Add window button functionality
-window.addEventListener("load", () => {
-	const windowButtons = document.querySelectorAll("#windowButtons p")
-
-	// // Close button (X)
-	// windowButtons[2].addEventListener("click", () => {
-	// 	if (confirm("Are you sure you want to close the game?")) {
-	// 		document.body.innerHTML =
-	// 			'<div style="color: white; text-align: center; margin-top: 100px;"><h1>Game Closed</h1><p>Refresh the page to </p></div>'
-	// 	}
-	// })
-
-	// // Minimize button (_)
-	// windowButtons[0].addEventListener("click", () => {
-	// 	const gameContainer = document.getElementById("game-container")
-	// 	if (gameContainer.style.display === "none") {
-	// 		gameContainer.style.display = "block"
-	// 	} else {
-	// 		gameContainer.style.display = "none"
-	// 	}
-	// })
-
-	// // Maximize button (□)
-	// windowButtons[1].addEventListener("click", () => {
-	// 	const container = document.querySelector(".container")
-	// 	if (container.style.maxWidth === "100%") {
-	// 		container.style.maxWidth = "800px"
-	// 	} else {
-	// 		container.style.maxWidth = "100%"
-	// 	}
-	// })
-})
 
 // Initialize the game when the page loads
 window.addEventListener("load", initGame)

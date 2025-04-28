@@ -1,6 +1,3 @@
-// Import story nodes
-import { storyNodes } from "./story.js"
-
 // Game state object
 let gameState = {
 	mentalHealth: 100,
@@ -57,6 +54,12 @@ function drinkShastaCola() {
 
 	return false
 }
+
+
+document.getElementById("soda-button").addEventListener("click", () => {
+	drinkShastaCola();
+});
+
 
 // Export functions and state
 export { gameState, initGameState, decreaseShastaCola, drinkShastaCola }

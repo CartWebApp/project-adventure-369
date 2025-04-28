@@ -43,6 +43,9 @@ export class UI {
 		const shastaColaBar = document.getElementById("shasta-cola-bar")
 		const balanceAmount = document.getElementById("balance-amount")
 
+		updateShastaCola()
+		updatebalance()
+
 		if (gameState.mentalHealth <= 0 && !gameState.gameOver) {
 			gameState.gameOver = true
 			triggerTrainAnimation()
@@ -166,16 +169,6 @@ document.addEventListener("keypress", (event) => {
 	document.getElementById("keystroke").innerText = event.key;
 })
 
-function getPos(obj) {
-    if (!obj) return;
-    let objBox = obj.getBoundingClientRect();
-    let pos = {};
-    pos.top = objBox.top
-    pos.bottom = objBox.bottom
-    pos.left = objBox.left
-    pos.Right = objBox.Right
-    return pos;
-}
 // Update Shasta Cola bar
 function updateShastaCola() {
 	const shastaColaBar = document.getElementById("shasta-cola-bar")
@@ -218,6 +211,11 @@ function showGameOver() {
 		window.location.reload();
 	})
 }
+
+document.getElementById("soda-button").addEventListener("click", () => {
+	updateShastaCola();
+	updatebalance();
+});
 
 function getEnding() {
 	return endScreen

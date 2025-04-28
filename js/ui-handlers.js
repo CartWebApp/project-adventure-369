@@ -1,10 +1,9 @@
 // Import dependencies
-import { gameState, makeChoice, drinkShastaCola } from "./game-state.js"
+import { gameState } from "./game-state.js"
 import { storyNodes } from "./story.js"
 import { triggerTrainAnimation } from "./events.js"
 
 let endScreen = false;
-let typeWriterRunning = false;
 
 export class UI {
 	constructor(initMessage) {
@@ -12,24 +11,31 @@ export class UI {
 	}
 
 	async init() {
-		let t = await this.typeWriter(this.initMessage, 0);
+		await this.typeWriter(this.initMessage, 0);
 		this.createButton(storyNodes[gameState.currentNode]);
+		this.updateGameDisplay();
 	}
 
 	typeWriter(text, index) {
-		typeWriterRunning = true
-		if (index == 0) {
-			let out = document.createElement("p");
-			document.getElementById("story-text").appendChild(out)
-		}
-
-		if (index < text.length) {
-			document.getElementById("story-text").children[document.getElementById("story-text").children.length-1].innerHTML += text.charAt(index);
-			setTimeout(() => {
-				this.typeWriter(text, index + 1)
-			}, 50); // Delay of 100ms
-		}
-		typeWriterRunning = false
+		return new Promise((resolve) => {
+			if (index === 0) {
+				let out = document.createElement("p");
+				document.getElementById("story-text").appendChild(out);
+			}
+	
+			const typeChar = (i) => {
+				if (i < text.length) {
+					document.getElementById("story-text").children[document.getElementById("story-text").children.length - 1].innerHTML += text.charAt(i);
+					setTimeout(() => {
+						typeChar(i + 1);
+					}, 50);
+				} else {
+					resolve(); // resolve when finished
+				}
+			};
+	
+			typeChar(index);
+		});
 	}
 
 	updateGameDisplay() {
@@ -87,9 +93,12 @@ export class UI {
 		}
 	}
 
-	updateStoryText() {
+	async updateStoryText() {
+		const choicesContainer = document.getElementById("choices-container")
+		choicesContainer.innerHTML = ""
+
+		await this.typeWriter(storyNodes[gameState.currentNode].text, 0)
 		this.createButton(storyNodes[gameState.currentNode])
-		this.typeWriter(storyNodes[gameState.currentNode].text, 0)
 	}
 
 	createButton(node) {

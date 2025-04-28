@@ -169,7 +169,7 @@ function triggerTrainAnimation() {
 			train.style.left = "-300px"
 			train.style.transform = "translateY(-50%)"
 			startPos = -300
-			endPos = window.innerWidth + 300
+			endPos = window.innerWidth + 1000
 
 			// Animate train
 			const animateFromLeft = () => {
@@ -179,7 +179,6 @@ function triggerTrainAnimation() {
 				// Push game container
 				if (startPos > 100) {
 					gameContainer.style.transform = `translateX(${startPos - 100}px)`
-					gameContainerWindowBar.style.transform = `translateX(${startPos - 100}px)`
 				}
 
 				if (startPos < endPos) {
@@ -197,7 +196,7 @@ function triggerTrainAnimation() {
 			train.style.left = window.innerWidth + "px"
 			train.style.transform = "translateY(-50%) scaleX(-1)"
 			startPos = window.innerWidth + 300
-			endPos = -300
+			endPos = -1000
 
 			// Animate train
 			const animateFromRight = () => {

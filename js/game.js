@@ -45,7 +45,7 @@ function initGameSystems(ui) {
 				triggerRandomEvent()
 			}
 		}
-	}, 10000)
+	}, 7500)
 }
 
 // Initialize the game when the page loads

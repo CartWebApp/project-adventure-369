@@ -1,3 +1,7 @@
+:root {
+  --red: rgb(161, 6, 8);
+}
+
 * {
   cursor: url('/assets/cursor.png'), auto;
   margin: 0;
@@ -59,7 +63,7 @@ main {
 }
 
 #windowButtons p:last-child:hover {
-  background-color: red;
+  background-color: var(--red);
 }
 
 #settings-container {
@@ -175,7 +179,7 @@ main {
   width: 100%;
   margin-bottom: 10px;
   background-color: white;
-  color: red;
+  color: var(--red);
   border: none;
   text-decoration: underline;
   cursor: var(--pointer);
@@ -272,6 +276,8 @@ main {
   color: white;
   margin: 0;
   padding: 0;
+  text-align: center;
+  width: fit-content;
 }
 
 .head2::before,
@@ -286,6 +292,9 @@ main {
   color: black;
   width: 100%;
   top: 29px;
+  padding: 0;
+  margin: 0;
+  height: 20px;
 }
 
 /* Mental health and progress bars */
@@ -325,7 +334,7 @@ footer a {
   display: block;
   width: 200px;
   margin: 20px auto;
-  color: red;
+  color: var(--red);
   text-decoration: underline;
   cursor: var(--pointer);
   text-align: center;
@@ -390,6 +399,10 @@ footer a {
 }
 
 .glowie {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   font-size: 40px;
   cursor: var(--pointer);
@@ -404,8 +417,7 @@ footer a {
 .glowie-text {
   font-size: 12px;
   text-align: center;
-  color: #ff3333;
-  font-weight: bold;
+  color: var(--red);
 }
 
 /* Update parrot container to be on top of everything */
@@ -445,7 +457,7 @@ footer a {
 
 #train {
   position: absolute;
-  width: 300px;
+  width: 200vw;
   height: auto;
 }
 
@@ -502,8 +514,8 @@ footer a {
   animation: blinker 4s linear;
 }
 
-#story-text p:last-of-type::after {
-  content: " █";
+.story-text-element:last-of-type::after {
+  content: "█";
   
 }
 

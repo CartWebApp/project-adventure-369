@@ -5,6 +5,12 @@ import { triggerTrainAnimation } from "./events.js"
 
 let endScreen = false;
 
+function getRandomInt(min, max) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min) + min);
+}
+
 export class UI {
 	constructor(initMessage) {
 		this.initMessage = initMessage;
@@ -18,17 +24,18 @@ export class UI {
 
 	typeWriter(text, index) {
 		return new Promise((resolve) => {
-			if (index === 0) {
+			if (index == 0) {
 				let out = document.createElement("p");
+				out.classList.add("story-text-element");
 				document.getElementById("story-text").appendChild(out);
 			}
 	
 			const typeChar = (i) => {
 				if (i < text.length) {
-					document.getElementById("story-text").children[document.getElementById("story-text").children.length - 1].innerHTML += text.charAt(i);
+					document.getElementsByClassName("story-text-element")[document.getElementsByClassName("story-text-element").length - 1].innerHTML += text.charAt(i);
 					setTimeout(() => {
 						typeChar(i + 1);
-					}, 50);
+					}, getRandomInt(20, 50));
 				} else {
 					resolve(); // resolve when finished
 				}
@@ -42,6 +49,7 @@ export class UI {
 		const mentalHealthBar = document.getElementById("mental-health-bar")
 		const shastaColaBar = document.getElementById("shasta-cola-bar")
 		const balanceAmount = document.getElementById("balance-amount")
+		const choicesContainer = document.getElementById("choices-container")
 
 		updateShastaCola()
 		updatebalance()

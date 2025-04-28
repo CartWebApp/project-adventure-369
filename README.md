@@ -1,2 +1,2 @@
 # terry-game
-A dumb game we have to make for CART.
+A game we have to make for CART.

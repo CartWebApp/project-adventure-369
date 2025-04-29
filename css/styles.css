@@ -478,6 +478,10 @@ footer a {
   color: mediumblue;
 }
 
+#game-over h2 {
+  font-weight: normal;
+}
+
 #game-over::before {
   content: "AFTERDAVIS";
   display: block;

@@ -4,13 +4,14 @@ import { updateShastaCola as updateShastaColaUI, UI } from "./ui-handlers.js"
 import { triggerRandomEvent } from "./events.js"
 import { storyNodes } from "./story.js"
 
+let UIManager = new UI(storyNodes.start.text)
+
 // Initialize the game
 function initGame() {
 	// Initialize game state
 	initGameState()
 
-	// Initialize UI
-	let UIManager = new UI(storyNodes.start.text)
+	// Initialize UIK
 	UIManager.init()
 
 	// Start game systems
@@ -32,9 +33,7 @@ function initGameSystems(ui) {
 	gameState.shastaInterval = setInterval(() => {
 		decreaseShastaColaState()
 		updateShastaColaUI()
-		if (!gameState.eventActive) {
-			ui.updateGameDisplay() // Update display if mental health changed
-		}
+		ui.updateGameDisplay() // Update display if mental health changed
 	}, 2000)
 
 	// Start random events based on mental health
@@ -45,11 +44,15 @@ function initGameSystems(ui) {
 				triggerRandomEvent()
 			}
 		}
-	}, 7500)
+	}, 2000)
+}
+
+function getUIManager() {
+	return UIManager;
 }
 
 // Initialize the game when the page loads
 window.addEventListener("load", initGame)
 
 // Export the init function for restart functionality
-export { initGame }
+export { initGame, getUIManager }

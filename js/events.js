@@ -80,6 +80,10 @@ function triggerParrotEvent() {
 	// Randomly decide if parrot comes from left or right
 	const fromLeft = Math.random() < 0.5
 
+	let birdAudio = new Audio("/assets/sounds/bird.mp3");
+	birdAudio.loop = true;
+	birdAudio.play();
+
 	// Position parrot at the edge of the window (not just the game container)
 	if (fromLeft) {
 		parrot.style.left = "-80px"
@@ -131,6 +135,10 @@ function triggerParrotEvent() {
 	function handleParrotClick() {
 		// Stop parrot animation
 		clearInterval(parrotAnimation)
+
+		birdAudio.pause();
+
+		new Audio("/assets/sounds/shut-up-bird.mp3").play()
 
 		// Remove parrot
 		parrotContainer.classList.add("hidden")

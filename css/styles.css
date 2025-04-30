@@ -135,7 +135,7 @@ main {
   color: mediumblue;
 }
 
-#story-text > p {
+.story-text-element {
   white-space: pre-wrap;
   color: mediumblue;
 }
@@ -571,4 +571,17 @@ header > p:last-of-type {
 
 #keystroke {
   text-transform: uppercase;
+}
+
+#instructionPopup {
+  position: fixed;
+  width: 400px;
+  max-width: 80vw;
+  height: 450px;
+  max-height: 100vw;
+  background: white;
+}
+
+.choice-message {
+  color: var(--red)
 }

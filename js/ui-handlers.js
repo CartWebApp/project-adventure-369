@@ -56,7 +56,10 @@ export class UI {
 
 		if (gameState.mentalHealth <= 0 && !gameState.gameOver) {
 			gameState.gameOver = true
-			triggerTrainAnimation()
+			triggerTrainAnimation();
+			document.getElementById("backgroundMusic").pause();
+			new Audio('/assets/sounds/train.mp3').play();
+			this.clearAllOverlays();
 			return
 		}
 
@@ -160,6 +163,13 @@ export class UI {
 		}
 	
 		this.checkMoney()
+
+		let out = document.createElement("p");
+		out.classList.add("choice-message")
+		document.getElementById("story-text").appendChild(out);
+
+		document.getElementsByClassName("choice-message")[document.getElementsByClassName("choice-message").length - 1].innerText = choice.text;
+
 	
 		// Move to next node
 		console.log(choice.nextNode)
@@ -170,6 +180,11 @@ export class UI {
 		if (gameState.balance < 0) {
 			gameState.balance = 0
 		}
+	}
+
+	clearAllOverlays() {
+		document.getElementById("glowie-container").classList.remove("active");
+		document.getElementById("glowie-container").classList.add("hidden");
 	}
 }
 
@@ -228,6 +243,11 @@ document.getElementById("soda-button").addEventListener("click", () => {
 function getEnding() {
 	return endScreen
 }
+
+document.body.addEventListener("click", () => {
+	const audio = document.getElementById("backgroundMusic");
+	audio.play();
+});
 
 // Export UI functions
 export { updateShastaCola, updatebalance, showMessage, showGameOver, getEnding }

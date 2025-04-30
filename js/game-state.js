@@ -1,3 +1,5 @@
+import { triggerTrainAnimation } from "./events.js"
+
 // Game state object
 let gameState = {
 	mentalHealth: 100,
@@ -32,6 +34,12 @@ function initGameState() {
 
 // Decrease Shasta Cola level
 function decreaseShastaCola() {
+	if (gameState.mentalHealth <= 0 && !gameState.gameOver) {
+		gameState.gameOver = true
+		triggerTrainAnimation()
+		return
+	}
+
 	gameState.shastaCola -= 10
 
 	if (gameState.shastaCola <= 0) {

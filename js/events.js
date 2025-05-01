@@ -28,6 +28,8 @@ function triggerGlowieEvent() {
 	// Add overlay
 	document.body.classList.add("overlay")
 
+	new Audio("/assets/sounds/glowie.mp3").play();
+
 	// Position glowie randomly
 	repositionGlowie()
 
@@ -124,8 +126,9 @@ function triggerParrotEvent() {
 
 			// Penalty
 			gameState.mentalHealth -= 10
-			updateGameDisplay()
 			showMessage("The parrot escaped! Your mental health decreased!")
+			birdAudio.pause();
+			birdAudio.playbackRate = 0;
 		} else {
 			// Move parrot
 			parrot.style.left = currentLeft + (fromLeft ? speed : -speed) + "px"
@@ -137,8 +140,10 @@ function triggerParrotEvent() {
 		clearInterval(parrotAnimation)
 
 		birdAudio.pause();
+		birdAudio.loop = false;
 
-		new Audio("/assets/sounds/shut-up-bird.mp3").play()
+		new Audio("/assets/sounds/shut-up-bird.mp3").play();
+
 
 		// Remove parrot
 		parrotContainer.classList.add("hidden")
@@ -149,7 +154,6 @@ function triggerParrotEvent() {
 
 		// Reward
 		gameState.balance += 15
-		updatebalance()
 		showMessage("You caught the parrot! +$15")
 	}
 }
@@ -159,9 +163,10 @@ function triggerTrainAnimation() {
 	const trainContainer = document.getElementById("train-container")
 	const train = document.getElementById("train")
 	const gameContainer = document.getElementById("game-container")
-	const gameContainerWindowBar = document.getElementById("windowButtons")
 
 	clearAllEvents()
+
+	new Audio('/assets/sounds/train.mp3').play();
 
 	// Show train container
 	trainContainer.style.display = "block"
@@ -229,13 +234,11 @@ function triggerTrainAnimation() {
 }
 
 function clearAllEvents() {
-	for (let i of document.getElementById("parrot-container").children) {
-		i.remove()
-	}
+	const audioElements = Array.from(document.getElementsByTagName('audio'));
 
-	for (let i of document.getElementById("glowie-container").children) {
-		i.remove()
-	}
+	audioElements.forEach((element) => {
+		element.pause();
+	})
 }
 
 // Export event functions

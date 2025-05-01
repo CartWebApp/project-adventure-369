@@ -585,3 +585,32 @@ header > p:last-of-type {
 .choice-message {
   color: var(--red)
 }
+
+#overlayContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  user-select: none;
+  pointer-events: none;
+}
+
+.schizoEpisode {
+  background-image: url(/assets/static.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+}
+
+@keyframes schizoFadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0.5;
+  }
+}

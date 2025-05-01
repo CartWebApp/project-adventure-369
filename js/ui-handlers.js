@@ -57,8 +57,6 @@ export class UI {
 		if (gameState.mentalHealth <= 0 && !gameState.gameOver) {
 			gameState.gameOver = true
 			triggerTrainAnimation();
-			document.getElementById("backgroundMusic").pause();
-			new Audio('/assets/sounds/train.mp3').play();
 			this.clearAllOverlays();
 			return
 		}
@@ -82,8 +80,11 @@ export class UI {
 			mentalHealthBar.style.backgroundColor = "#ff3333" // Red for low health
 		} else if (gameState.mentalHealth < 60) {
 			mentalHealthBar.style.backgroundColor = "#ffcc33" // Yellow for medium health
+			document.getElementById("overlayContainer").classList.add("schizoEpisode");
 		} else {
 			mentalHealthBar.style.backgroundColor = "#33cc33" // Green for good health
+
+			if (document.getElementById("overlayContainer").classList.contains("schizoEpisode")) document.getElementById("overlayContainer").classList.remove("schizoEpisode");
 		}
 
 		// If this is an ending node
@@ -148,18 +149,6 @@ export class UI {
 	
 		if (choice.projectProgress) {
 			gameState.projectProgress += choice.projectProgress
-		}
-	
-		// Update balance based on choice
-		if (choice.balance) {
-			gameState.balance += choice.balance
-		} else {
-			// Default balance change based on the choice type
-			if (choice.nextNode.includes("job") || choice.nextNode.includes("work")) {
-				gameState.balance += Math.floor(Math.random() * 50) + 20
-			} else if (choice.nextNode.includes("homeless") || choice.nextNode.includes("give_up")) {
-				gameState.balance -= Math.floor(Math.random() * 30) + 10
-			}
 		}
 	
 		this.checkMoney()

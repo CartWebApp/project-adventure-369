@@ -6,7 +6,7 @@ import { showMessage, showGameOver, getEnding } from "./ui-handlers.js"
 function triggerRandomEvent() {
 	console.log("random event")
 	if (gameState.eventActive) return
-	if (getEnding()) return
+	if (gameState.gameOver) return
 
 	const eventType = Math.random() > 0.5 ? "glowie" : "parrot"
 
@@ -28,7 +28,9 @@ function triggerGlowieEvent() {
 	// Add overlay
 	document.body.classList.add("overlay")
 
-	new Audio("/assets/sounds/glowie.mp3").play();
+	let sfx = new Audio("/assets/sounds/glowie.mp3");
+	sfx.volume = 1;
+	sfx.play();
 
 	// Position glowie randomly
 	repositionGlowie()

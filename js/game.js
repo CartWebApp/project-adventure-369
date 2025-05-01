@@ -8,6 +8,8 @@ let UIManager = new UI(storyNodes.start.text)
 
 // Initialize the game
 function initGame() {
+	document.getElementById("backgroundMusic").volume = 0.3;
+
 	// Initialize game state
 	initGameState()
 

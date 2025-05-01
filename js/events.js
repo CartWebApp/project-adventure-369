@@ -2,6 +2,10 @@
 import { gameState } from "./game-state.js"
 import { showMessage, showGameOver, getEnding } from "./ui-handlers.js"
 
+function randomIntFromInterval(min, max) { // min and max included 
+	return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 // Trigger a random event
 function triggerRandomEvent() {
 	console.log("random event")
@@ -158,6 +162,90 @@ function triggerParrotEvent() {
 		gameState.balance += 15
 		showMessage("You caught the parrot! +$15")
 	}
+}
+
+// Trigger the parrot event
+function triggerAntEvent() {
+	gameState.eventActive = true
+	const antContainer = document.getElementById("ant-container")
+	let ants = [];
+
+	for (let i = 0; i < randomIntFromInterval(0, 30); i++) {
+	}
+
+	// Randomly decide if parrot comes from left or right
+	const fromLeft = Math.random() < 0.5
+
+	// // let birdAudio = new Audio("/assets/sounds/bird.mp3");
+	// // birdAudio.loop = true;
+	// // birdAudio.play();
+
+	// // Position parrot at the edge of the window (not just the game container)
+	// if (fromLeft) {
+	// 	parrot.style.left = "-80px"
+	// 	parrot.style.transform = "scaleX(1)" // Normal direction
+	// } else {
+	// 	parrot.style.left = window.innerWidth + "px"
+	// 	parrot.style.transform = "scaleX(-1)" // Flip horizontally
+	// }
+
+	// // Position vertically in the middle area of the screen
+	// parrot.style.top = Math.floor(Math.random() * (window.innerHeight - 200)) + 100 + "px"
+
+	// // Show message
+	// showMessage("A parrot is flying across the screen! Click it before it escapes!")
+
+	// // Add click event
+	// parrot.addEventListener("click", handleParrotClick)
+
+	// // Start moving parrot - make it faster (5-10 pixels per frame)
+	// const speed = Math.random() * Math.floor(Math.random() * (20 - 10 + 1) + 10) + Math.floor(Math.random() * (20 - 10 + 1) + 10);
+	// const parrotAnimation = setInterval(moveParrot, 30)
+
+	// function moveParrot() {
+	// 	const currentLeft = Number.parseInt(parrot.style.left)
+
+	// 	if ((fromLeft && currentLeft > window.innerWidth) || (!fromLeft && currentLeft < -80)) {
+	// 		// Parrot escaped
+	// 		clearInterval(parrotAnimation)
+	// 		parrotContainer.classList.add("hidden")
+	// 		parrotContainer.classList.remove("active")
+	// 		parrot.removeEventListener("click", handleParrotClick)
+	// 		gameState.eventActive = false
+	// 		document.body.classList.remove("overlay")
+
+	// 		// Penalty
+	// 		gameState.mentalHealth -= 10
+	// 		showMessage("The parrot escaped! Your mental health decreased!")
+	// 		birdAudio.pause();
+	// 		birdAudio.playbackRate = 0;
+	// 	} else {
+	// 		// Move parrot
+	// 		parrot.style.left = currentLeft + (fromLeft ? speed : -speed) + "px"
+	// 	}
+	// }
+
+	// function handleParrotClick() {
+	// 	// Stop parrot animation
+	// 	clearInterval(parrotAnimation)
+
+	// 	birdAudio.pause();
+	// 	birdAudio.loop = false;
+
+	// 	new Audio("/assets/sounds/shut-up-bird.mp3").play();
+
+
+	// 	// Remove parrot
+	// 	parrotContainer.classList.add("hidden")
+	// 	parrotContainer.classList.remove("active")
+	// 	parrot.removeEventListener("click", handleParrotClick)
+	// 	gameState.eventActive = false
+	// 	document.body.classList.remove("overlay")
+
+	// 	// Reward
+	// 	gameState.balance += 15
+	// 	showMessage("You caught the parrot! +$15")
+	// }
 }
 
 // Trigger the train animation

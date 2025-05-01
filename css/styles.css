@@ -421,6 +421,7 @@ footer a {
 }
 
 /* Update parrot container to be on top of everything */
+#ant-container,
 #parrot-container {
   position: fixed; /* Changed to fixed to ensure it's always visible */
   top: 0;
@@ -613,4 +614,8 @@ header > p:last-of-type {
   100% {
     opacity: 0.5;
   }
+}
+
+.ant {
+  height: 10%;
 }

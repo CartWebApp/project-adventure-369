@@ -1,6 +1,6 @@
 // Import dependencies
 import { gameState } from "./game-state.js"
-import { updatebalance, showMessage, showGameOver, getEnding } from "./ui-handlers.js"
+import { showMessage, showGameOver, getEnding } from "./ui-handlers.js"
 
 // Trigger a random event
 function triggerRandomEvent() {

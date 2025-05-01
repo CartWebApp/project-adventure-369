@@ -46,10 +46,11 @@ export class UI {
 	}
 
 	updateGameDisplay() {
+		if (endScreen) return;
+
 		const mentalHealthBar = document.getElementById("mental-health-bar")
 		const shastaColaBar = document.getElementById("shasta-cola-bar")
 		const balanceAmount = document.getElementById("balance-amount")
-		const choicesContainer = document.getElementById("choices-container")
 
 		updateShastaCola()
 		updatebalance()
@@ -87,25 +88,7 @@ export class UI {
 			if (document.getElementById("overlayContainer").classList.contains("schizoEpisode")) document.getElementById("overlayContainer").classList.remove("schizoEpisode");
 		}
 
-		// If this is an ending node
-		if (this.currentNode.ending) {
-			// Display ending
-			const endingElement = document.createElement("div")
-			endingElement.className = "ending"
-			endingElement.textContent = this.currentNode.ending
-			choicesContainer.appendChild(endingElement)
 
-			// Add restart button
-			const restartButton = document.createElement("button")
-			restartButton.className = "restart-btn"
-			restartButton.textContent = "Restart Game"
-			restartButton.addEventListener("click", () => {window.location.reload()})
-			choicesContainer.appendChild(restartButton)
-
-			endScreen = true;
-
-			return
-		}
 	}
 
 	async updateStoryText() {
@@ -113,7 +96,13 @@ export class UI {
 		choicesContainer.innerHTML = ""
 
 		await this.typeWriter(storyNodes[gameState.currentNode].text, 0)
-		this.createButton(storyNodes[gameState.currentNode])
+
+		// If this is an ending node
+		if (this.currentNode.ending) {
+			this.displayEnding();
+		} else {
+			this.createButton(storyNodes[gameState.currentNode])
+		}
 	}
 
 	createButton(node) {
@@ -174,6 +163,26 @@ export class UI {
 	clearAllOverlays() {
 		document.getElementById("glowie-container").classList.remove("active");
 		document.getElementById("glowie-container").classList.add("hidden");
+	}
+
+	displayEnding() {
+		const choicesContainer = document.getElementById("choices-container")
+		// Display ending
+
+		const endingElement = document.createElement("div")
+		endingElement.className = "ending"
+		endingElement.textContent = this.currentNode.ending
+		choicesContainer.appendChild(endingElement)
+		// Add restart button
+		const restartButton = document.createElement("button")
+		restartButton.className = "restart-btn"
+		restartButton.textContent = "Restart Game"
+		restartButton.addEventListener("click", () => {window.location.reload()})
+		choicesContainer.appendChild(restartButton)
+		
+		endScreen = true;
+		
+		return
 	}
 }
 

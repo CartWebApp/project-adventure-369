@@ -213,8 +213,13 @@ function showMessage(message) {
 }
 
 // Show game over message
-function showGameOver() {
+function showGameOver(message=null) {
 	const gameOver = document.getElementById("game-over")
+
+	if (message) {
+		gameOver.children[1].innerText = message;
+	}
+
 	gameOver.style.display = "block"
 
 	gameState.gameOver = true;
@@ -242,6 +247,11 @@ document.getElementById("soda-button").addEventListener("click", () => {
 function getEnding() {
 	return endScreen
 }
+
+document.getElementById("sClose").addEventListener("click", () => {
+	document.getElementById("game-container").classList.add("hidden");
+	showGameOver("You found the secret ending!");
+});
 
 document.body.addEventListener("click", () => {
 	const audio = document.getElementById("backgroundMusic");

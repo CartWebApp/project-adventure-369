@@ -32,8 +32,6 @@ function triggerRandomEvent() {
 
 	const eventType = randomIntFromInterval(1, 3);
 
-	triggerAntEvent();
-
 	if (eventType === 1) {
 		triggerGlowieEvent()
 	} else if (eventType === 2) {
@@ -138,7 +136,7 @@ function triggerParrotEvent() {
 
 	// Start moving parrot - make it faster (5-10 pixels per frame)
 	const speed = Math.random() * Math.floor(Math.random() * (20 - 10 + 1) + 10) + Math.floor(Math.random() * (20 - 10 + 1) + 10);
-	const parrotAnimation = setInterval(moveParrot, 30)
+	const parrotAnimation = setInterval(moveParrot, 40)
 
 	function moveParrot() {
 		const currentLeft = Number.parseInt(parrot.style.left)
@@ -391,6 +389,12 @@ function clearAllEvents() {
 		element.pause();
 	})
 }
+
+document.body.addEventListener("keypress", (event) => {
+	if (event.key == "9") {
+		triggerParrotEvent();
+	}
+})
 
 // Export event functions
 export { triggerRandomEvent, triggerGlowieEvent, triggerParrotEvent, triggerTrainAnimation }

@@ -35,8 +35,11 @@ function initGameSystems(ui) {
 	gameState.shastaInterval = setInterval(() => {
 		decreaseShastaColaState()
 		updateShastaColaUI()
-		ui.updateGameDisplay() // Update display if mental health changed
 	}, 2000)
+
+	setInterval(() => {
+		ui.updateGameDisplay();
+	}, 100)
 
 	// Start random events based on mental health
 	gameState.eventInterval = setInterval(() => {
@@ -46,7 +49,7 @@ function initGameSystems(ui) {
 				triggerRandomEvent()
 			}
 		}
-	}, 2000)
+	}, 3500)
 }
 
 function getUIManager() {
@@ -54,7 +57,11 @@ function getUIManager() {
 }
 
 // Initialize the game when the page loads
-window.addEventListener("load", initGame)
+document.getElementById("startGame").addEventListener("click", () => {
+	document.getElementById("game-container").classList.remove("hidden");
+	document.getElementById("settings-container").classList.add("hidden");
+	initGame();
+});
 
 // Export the init function for restart functionality
 export { initGame, getUIManager }

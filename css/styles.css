@@ -66,10 +66,6 @@ main {
   background-color: var(--red);
 }
 
-#settings-container {
-  width: 50%;
-}
-
 #settings-container,
 #game-container {
   border: 6px double mediumblue;
@@ -80,6 +76,30 @@ main {
   margin: 5px 5px;
   overflow: visible;
   position: relative;
+}
+
+#settings-container {
+  color: mediumblue;
+}
+
+#settings-container > h2 {
+  font-weight: normal;
+}
+
+#settings-container > ol {
+  list-style: none;
+}
+
+#settings-container > ol > li::before {
+  content: "* ";
+}
+
+#startGame {
+  color: var(--red);
+  border: none;
+  background-color: white;
+  text-decoration: underline;
+  font-size: 18px;
 }
 
 #game-container {

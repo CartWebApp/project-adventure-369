@@ -217,6 +217,7 @@ function showGameOver() {
 	const gameOver = document.getElementById("game-over")
 	gameOver.style.display = "block"
 
+	gameState.gameOver = true;
 	endScreen = true;
 
 	// Add event listener to restart button

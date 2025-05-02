@@ -94,11 +94,25 @@ main {
   content: "* ";
 }
 
+.restart-btn,
 #startGame {
-  color: var(--red);
-  border: none;
+  color: black;
+  outline: 2px solid black;
+  border: 2px solid white;
   background-color: white;
-  text-decoration: underline;
+  padding: 5px;
+  margin: 3px;
+  font-size: 18px;
+}
+
+.restart-btn:hover,
+#startGame:hover {
+  color: white;
+  outline: 2px solid black;
+  border: 2px solid white;
+  background-color: black;
+  padding: 5px;
+  margin: 3px;
   font-size: 18px;
 }
 
@@ -345,12 +359,12 @@ footer a {
 .ending {
   font-weight: bold;
   color: #ff3333;
-  text-align: center;
+  text-align: left;
   margin: 20px 0;
   font-size: 1.2em;
 }
 
-.restart-btn {
+/* .restart-btn {
   display: block;
   width: 200px;
   margin: 20px auto;
@@ -361,7 +375,7 @@ footer a {
   font-size: 16px;
   border: none;
   background-color: white;
-}
+} */
 
 @media (max-width: 600px) {
   #status-container {

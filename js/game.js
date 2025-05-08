@@ -63,5 +63,11 @@ document.getElementById("startGame").addEventListener("click", () => {
 	initGame();
 });
 
+document.addEventListener("keypress", (event) => {
+	if (event.key == "h") {
+		UIManager.hair();
+	}
+});
+
 // Export the init function for restart functionality
 export { initGame, getUIManager }

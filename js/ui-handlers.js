@@ -1,7 +1,7 @@
 // Import dependencies
 import { gameState } from "./game-state.js"
 import { storyNodes } from "./story.js"
-import { triggerTrainAnimation } from "./events.js"
+import { randomIntFromInterval, triggerTrainAnimation } from "./events.js"
 
 let endScreen = false;
 
@@ -20,6 +20,7 @@ export class UI {
 		await this.typeWriter(this.initMessage, 0);
 		this.createButton(storyNodes[gameState.currentNode]);
 		this.updateGameDisplay();
+		this.hair();
 	}
 
 	typeWriter(text, index) {
@@ -127,6 +128,8 @@ export class UI {
 
 	makeChoice(choice) {
 		if (gameState.eventActive) return
+
+		this.hair();
 	
 		// Add current node text to history
 		gameState.history.push(storyNodes[gameState.currentNode].text)
@@ -183,6 +186,15 @@ export class UI {
 		endScreen = true;
 		
 		return
+	}
+
+	hair() {
+		let hair = document.createElement("img");
+		hair.classList.add("hair");
+		document.getElementById('overlayContainer').appendChild(hair);
+
+		hair.style.left = randomIntFromInterval(200, window.innerWidth) + "px";
+		hair.style.top = randomIntFromInterval(200, window.innerHeight) + "px";
 	}
 }
 

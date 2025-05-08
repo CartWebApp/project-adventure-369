@@ -8,19 +8,87 @@ function randomIntFromInterval(min, max) { // min and max included
 
 class Ant {
 	constructor() {
-		this.element = document.createElement("img");
-		this.init();
-	}
+		const antContainer = document.getElementById("ant-container");
+		this.fromLeft = Math.random() < 0.5;
 
-	init() {
-		const antContainer = document.getElementById("antContainer");
+		this.contain = antContainer;
+		this.element = document.createElement("img");
+
+		this.element.classList.add("ant");
+
         this.element.src = "/assets/ant.gif";
-		antContainer.appendChild(this.element);
+		this.contain.appendChild(this.element);
 
 		this.element.style.left = "-80px";
 		this.element.style.transform = "scaleX(1)";
 		
-		this.element.style.top = Math.floor(Math.random() * (window.innerHeight - 200)) + 100 + "px";
+		this.element.style.top = Math.floor(Math.random() * (window.innerHeight)) + "px";
+
+
+
+		this.move(this.element);
+	}
+
+	move(e) {
+		const speed = Math.random() * Math.floor(Math.random() * (20 - 10 + 1) + 10) + Math.floor(Math.random() * (20 - 10 + 1) + 10);
+	
+		this.contain.classList.remove("hidden");
+		this.contain.classList.add("active");
+	
+		e.classList.remove("hidden");
+		e.classList.add("show");
+	
+		const screenWidth = window.innerWidth;
+		let startPos, endPos;
+	
+		if (this.fromLeft) {
+			// Start off-screen left
+			startPos = -80;
+			endPos = screenWidth;
+	
+			e.style.left = "-80px";
+			e.style.transform = "scaleX(1)"; // Normal direction
+	
+			const animateFromLeft = () => {
+				startPos += speed * 0.1; // move to the right
+				e.style.transform = `translateX(${startPos}px)`;
+	
+				if (startPos < endPos) {
+					requestAnimationFrame(animateFromLeft);
+				} else {
+					e.remove(); // cleanup
+				}
+			};
+	
+			requestAnimationFrame(animateFromLeft);
+		} else {
+			// Start off-screen right
+			startPos = screenWidth;
+			endPos = -screenWidth;
+	
+			e.style.left = screenWidth + "px";
+			e.src = "/assets/antL.gif"
+	
+			const animateFromRight = () => {
+				startPos -= speed * 0.1; // move to the left
+				e.style.transform = `translateX(${startPos}px)`;
+	
+				if (startPos > endPos) {
+					requestAnimationFrame(animateFromRight);
+				} else {
+					e.remove(); // cleanup
+				}
+			};
+	
+			requestAnimationFrame(animateFromRight);
+		}
+	}
+}
+
+// Trigger the ant event
+function triggerAntEvent() {
+	for (let i = 0; i < randomIntFromInterval(100, 200); i++) {
+		new Ant();
 	}
 }
 
@@ -184,129 +252,6 @@ function triggerParrotEvent() {
 	}
 }
 
-// Trigger the parrot event
-function triggerAntEvent() {
-	// gameState.eventActive = true
-	// const antContainer = document.getElementById("ant-container")
-	// let ants = [];
-
-	// antContainer.classList.remove("hidden");
-	// antContainer.classList.add("active");
-
-	// if (antContainer.children) {
-	// 	antContainer.innerHTML = "";
-	// }
-
-	// let temp_a = document.createElement("img");
-	// temp_a.classList.add("ant");
-	// ants.push(temp_a);
-	// temp_a.src = "/assets/ant.gif";
-	// antContainer.appendChild(temp_a);
-
-	// let direction = Math.random() > 0.5 ? 1 : 2;
-
-	// if (direction === 1) {
-	// 	temp_a.style.left = "-80px";
-	// 	temp_a.style.transform = "scaleX(1)";
-	// }
-
-	// temp_a.style.top = Math.floor(Math.random() * (window.innerHeight - 200)) + 100 + "px";
-
-	// setInterval(moveAnt(temp_a, direction), 100);
-
-	// function moveAnt(ant, d) {
-	// 	const currentLeft = Number.parseInt(ant.style.left);
-	// 	const speed = Math.random() * Math.floor(Math.random() * (20 - 10 + 1) + 10) + Math.floor(Math.random() * (20 - 10 + 1) + 10);
-
-	// 	if ((d == 1 && currentLeft > window.innerWidth) || (d == 2 && currentLeft < -80)) {
-	// 		antContainer.classList.add("hidden");
-	// 		antContainer.classList.remove("active");
-	// 		gameState.eventActive = false;
-	// 		document.body.classList.remove("overlay");
-	// 		ant.remove();
-	// 	} else {
-	// 		// Move parrot
-	// 		if (d == 1) {
-	// 			ant.style.left = currentLeft + speed + "px";
-	// 		} else {
-	// 			ant.style.left = currentLeft + -speed + "px";
-	// 		}
-	// 	}
-	// }
-
-	// console.log(ants);
-	// // let birdAudio = new Audio("/assets/sounds/bird.mp3");
-	// // birdAudio.loop = true;
-	// // birdAudio.play();
-
-	// // Position parrot at the edge of the window (not just the game container)
-	// if (fromLeft) {
-	// 	parrot.style.left = "-80px"
-	// 	parrot.style.transform = "scaleX(1)" // Normal direction
-	// } else {
-	// 	parrot.style.left = window.innerWidth + "px"
-	// 	parrot.style.transform = "scaleX(-1)" // Flip horizontally
-	// }
-
-	// // Position vertically in the middle area of the screen
-	// parrot.style.top = Math.floor(Math.random() * (window.innerHeight - 200)) + 100 + "px"
-
-	// // Show message
-	// showMessage("A parrot is flying across the screen! Click it before it escapes!")
-
-	// // Add click event
-	// parrot.addEventListener("click", handleParrotClick)
-
-	// // Start moving parrot - make it faster (5-10 pixels per frame)
-	// const speed = Math.random() * Math.floor(Math.random() * (20 - 10 + 1) + 10) + Math.floor(Math.random() * (20 - 10 + 1) + 10);
-	// const parrotAnimation = setInterval(moveParrot, 30)
-
-	// function moveParrot() {
-	// 	const currentLeft = Number.parseInt(parrot.style.left)
-
-	// 	if ((fromLeft && currentLeft > window.innerWidth) || (!fromLeft && currentLeft < -80)) {
-	// 		// Parrot escaped
-	// 		clearInterval(parrotAnimation)
-	// 		parrotContainer.classList.add("hidden")
-	// 		parrotContainer.classList.remove("active")
-	// 		parrot.removeEventListener("click", handleParrotClick)
-	// 		gameState.eventActive = false
-	// 		document.body.classList.remove("overlay")
-
-	// 		// Penalty
-	// 		gameState.mentalHealth -= 10
-	// 		showMessage("The parrot escaped! Your mental health decreased!")
-	// 		birdAudio.pause();
-	// 		birdAudio.playbackRate = 0;
-	// 	} else {
-	// 		// Move parrot
-	// 		parrot.style.left = currentLeft + (fromLeft ? speed : -speed) + "px"
-	// 	}
-	// }
-
-	// function handleParrotClick() {
-	// 	// Stop parrot animation
-	// 	clearInterval(parrotAnimation)
-
-	// 	birdAudio.pause();
-	// 	birdAudio.loop = false;
-
-	// 	new Audio("/assets/sounds/shut-up-bird.mp3").play();
-
-
-	// 	// Remove parrot
-	// 	parrotContainer.classList.add("hidden")
-	// 	parrotContainer.classList.remove("active")
-	// 	parrot.removeEventListener("click", handleParrotClick)
-	// 	gameState.eventActive = false
-	// 	document.body.classList.remove("overlay")
-
-	// 	// Reward
-	// 	gameState.balance += 15
-	// 	showMessage("You caught the parrot! +$15")
-	// }
-}
-
 // Trigger the train animation
 function triggerTrainAnimation() {
 	const trainContainer = document.getElementById("train-container")
@@ -392,9 +337,9 @@ function clearAllEvents() {
 
 document.body.addEventListener("keypress", (event) => {
 	if (event.key == "9") {
-		triggerParrotEvent();
+		triggerAntEvent();
 	}
 })
 
 // Export event functions
-export { triggerRandomEvent, triggerGlowieEvent, triggerParrotEvent, triggerTrainAnimation }
+export { triggerRandomEvent, triggerGlowieEvent, triggerParrotEvent, triggerTrainAnimation, randomIntFromInterval }

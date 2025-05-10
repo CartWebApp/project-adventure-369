@@ -93,6 +93,7 @@ export class UI {
 	}
 
 	async updateStoryText() {
+		console.log("Updating story text");
 		const choicesContainer = document.getElementById("choices-container")
 		choicesContainer.innerHTML = ""
 
@@ -111,19 +112,17 @@ export class UI {
 
 		choicesContainer.innerHTML = ""
 
-		if (!gameState.eventActive) {
-			console.log("Generating buttons")
-			node.choices.forEach((choice) => {
-				const choiceButton = document.createElement("button")
-				choiceButton.className = "choice-btn"
-				choiceButton.textContent = choice.text
-				choiceButton.addEventListener("click", () => {
-					this.makeChoice(choice)
-					this.updateStoryText()
-				})
-				choicesContainer.appendChild(choiceButton)
+		console.log("Generating buttons")
+		node.choices.forEach((choice) => {
+			const choiceButton = document.createElement("button")
+			choiceButton.className = "choice-btn"
+			choiceButton.textContent = choice.text
+			choiceButton.addEventListener("click", () => {
+				this.makeChoice(choice)
+				this.updateStoryText()
 			})
-		}
+			choicesContainer.appendChild(choiceButton)
+		})
 	}
 
 	makeChoice(choice) {

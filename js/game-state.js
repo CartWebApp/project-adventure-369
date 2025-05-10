@@ -1,5 +1,3 @@
-import { triggerTrainAnimation } from "./events.js"
-
 // Game state object
 let gameState = {
 	mentalHealth: 100,
@@ -7,7 +5,7 @@ let gameState = {
 	currentNode: "start",
 	history: [],
 	shastaCola: 100,
-	balance: 25,
+	balance: 50,
 	eventActive: false,
 	shastaInterval: null,
 	eventInterval: null,
@@ -22,7 +20,7 @@ function initGameState() {
 		currentNode: "start",
 		history: [],
 		shastaCola: 100,
-		balance: 25,
+		balance: 50,
 		eventActive: false,
 		gameOver: false,
 		shastaInterval: null,

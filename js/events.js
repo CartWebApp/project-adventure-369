@@ -24,8 +24,6 @@ class Ant {
 		
 		this.element.style.top = Math.floor(Math.random() * (window.innerHeight)) + "px";
 
-
-
 		this.move(this.element);
 	}
 
@@ -87,6 +85,8 @@ class Ant {
 
 // Trigger the ant event
 function triggerAntEvent() {
+	new Audio("/assets/sounds/antcolony.mp3").play();
+
 	for (let i = 0; i < randomIntFromInterval(100, 200); i++) {
 		new Ant();
 	}
@@ -338,6 +338,8 @@ function clearAllEvents() {
 document.body.addEventListener("keypress", (event) => {
 	if (event.key == "9") {
 		triggerAntEvent();
+	} else if (event.key == "0") {
+		triggerGlowieEvent();
 	}
 })
 
